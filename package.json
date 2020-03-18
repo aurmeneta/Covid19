@@ -1,0 +1,21 @@
+{
+  "name": "covid19",
+  "version": "1.0.0",
+  "description": "Retrieve live statistics of the Covid-19 pandemic",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aurmeneta/Covid19.git"
+  },
+  "keywords": [ "covid19" ],
+  "author": "Andrés Urmeneta B. <aurmenetab@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aurmeneta/Covid19/issues"
+  },
+  "homepage": "https://github.com/aurmeneta/Covid19",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3"
+  }
+}
