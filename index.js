@@ -18,13 +18,13 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 const siteUrl = "https://www.worldometers.info/coronavirus/#countries";
 const charsToRemove = /[,+]/g;
 
-const axios = require("axios");
-const cheerio = require("cheerio");
+import { get } from "axios";
+import { load } from "cheerio";
 
-exports.getStats = () => axios.get(siteUrl).then(response => {
+export function getStats() { 	return get(siteUrl).then(response => {
 	let data = []; // Initialize an empty array to save the information to be retrieved.
 
-	const $ = cheerio.load(response.data); // Load the webpage.
+	const $ = load(response.data); // Load the webpage.
 	const table = $('#main_table_countries_today'); // Look for the table.
 	const tbodies = table.find('tbody'); // Look for the 'tbody' tags in the table.
 
@@ -69,4 +69,4 @@ exports.getStats = () => axios.get(siteUrl).then(response => {
 
 	// Return the array.
 	return data;
-});
+}); 	}
