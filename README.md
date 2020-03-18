@@ -13,7 +13,7 @@ const covid19 = requiere('covid19-stats');
 let stats = await covid19.getStats();
 ```
 
-`getStats` returns an array containing the stats by country and the totals. The countries are named as listed in worldometers. Use be your own risk.
+`getStats` returns an array containing the stats by country and the totals. The countries are named as listed in worldometers. Use by your own risk.
 
 ```javascript
 [
