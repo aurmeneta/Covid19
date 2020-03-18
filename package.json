@@ -1,7 +1,7 @@
 {
   "name": "covid19-stats",
-  "version": "1.0.0",
-  "description": "Retrieve live statistics of the Covid-19 pandemic. Scraper of worldometer.com",
+  "version": "1.0.1",
+  "description": "Retrieve live statistics of the Covid-19 pandemic. Scraper of worldometers.info",
   "main": "index.js",
   "repository": {
     "type": "git",

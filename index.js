@@ -21,7 +21,7 @@ const charsToRemove = /[,+]/g;
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-exports.getStats = axios.get(siteUrl).then(response => {
+exports.getStats = () => axios.get(siteUrl).then(response => {
 	let data = []; // Initialize an empty array to save the information to be retrieved.
 
 	const $ = cheerio.load(response.data); // Load the webpage.
