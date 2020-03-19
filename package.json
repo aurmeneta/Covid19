@@ -1,6 +1,6 @@
 {
   "name": "covid19-stats",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Retrieve worldometers' live statistics of the Covid-19 pandemic. Scraper of worldometers.info",
   "main": "index.js",
   "repository": {
