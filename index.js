@@ -21,52 +21,51 @@ const charsToRemove = /[,+]/g;
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+
+/**
+ * Scrapes the worldometers website for the statistical information. 
+ * Gets the webpage and then converts the html table in an array of objects. 
+ * Returns a promise, which returns an array containing the entries of the table.
+ */
 exports.getStats = () => axios.get(siteUrl).then(response => {
 	let data = []; // Initialize an empty array to save the information to be retrieved.
 
 	const $ = cheerio.load(response.data); // Load the webpage.
 	const table = $('#main_table_countries_today'); // Look for the table.
-	const tbodies = table.find('tbody'); // Look for the 'tbody' tags in the table.
+	const tbodies = table.find('tbody'); // Look for tbody tags inside the table tag.
 
-	// Data in the table is divided in two 'tbody' tags. The first one contains the information for each country and the second one the totals.
+	// The table has several tbody tags. The first one contains the information for every country/territory.
 	const tbody_countries = tbodies[0]; // Countries tbody.
-	const tbody_total = tbodies[1]; // Total tbody.
 
+	// Get every row of the table.
 	const table_rows_countries = $(tbody_countries).find('tr').toArray();
-	const table_rows_total = $(tbody_total).find('tr');
 
-	// Get the totals.
-	const total_columns = $(table_rows_total[0]).find('td');
-	let country = 'Total';
-	let totalCases = parseInt($(total_columns[1]).text().replace(charsToRemove,'')) || 0;
-	let newCases = parseInt($(total_columns[2]).text().replace(charsToRemove,'')) || 0;
-	let totalDeaths = parseInt($(total_columns[3]).text().replace(charsToRemove,'')) || 0;
-	let newDeaths = parseInt($(total_columns[4]).text().replace(charsToRemove,'')) || 0;
-	let totalRecovered = parseInt($(total_columns[5]).text().replace(charsToRemove,'')) || 0;
-	let activeCases = parseInt($(total_columns[6]).text().replace(charsToRemove,'')) || 0;
-	let criticalCases = parseInt($(total_columns[7]).text().replace(charsToRemove,'')) || 0;
-	let ratio = parseFloat($(total_columns[8]).text().replace(charsToRemove,'')) || 0;
-
-	// Add the date to the array.
-	data.push({country, totalCases, newCases, totalDeaths, newDeaths, totalRecovered, activeCases, criticalCases, ratio});
-
-	// Get the data by country.
+	// Get the data for each country.
 	table_rows_countries.forEach(row => {
+		// Get every column of the row.
 		const columns = $(row).find('td');
-		country = $(columns[0]).text().trim();
-		totalCases = parseInt($(columns[1]).text().replace(charsToRemove,'')) || 0;
-		newCases = parseInt($(columns[2]).text().replace(charsToRemove,'')) || 0;
-		totalDeaths = parseInt($(columns[3]).text().replace(charsToRemove,'')) || 0;
-		newDeaths = parseInt($(columns[4]).text().replace(charsToRemove,'')) || 0;
-		totalRecovered = parseInt($(columns[5]).text().replace(charsToRemove,'')) || 0;
-		activeCases = parseInt($(columns[6]).text().replace(charsToRemove,'')) || 0;
-		criticalCases = parseInt($(columns[7]).text().replace(charsToRemove,'')) || 0;
-		ratio = parseFloat($(columns[8]).text().replace(charsToRemove,'')) || 0;
+
+		country = $(columns[1]).text().trim().toUpperCase();
+		totalCases = parseInt($(columns[2]).text().replace(charsToRemove,'')) || 0;
+		newCases = parseInt($(columns[3]).text().replace(charsToRemove,'')) || 0;
+		totalDeaths = parseInt($(columns[4]).text().replace(charsToRemove,'')) || 0;
+		newDeaths = parseInt($(columns[5]).text().replace(charsToRemove,'')) || 0;
 
 		// Add the data to the array.
-		data.push({country, totalCases, newCases, totalDeaths, newDeaths, totalRecovered, activeCases, criticalCases, ratio});
+		data.push({country, totalCases, newCases, totalDeaths, newDeaths});
 	});
 
 	// Return the array.
 	return data;
 });
+
+
+/**
+ * Gets a the data of a specific country by searching it in the array returned from getStats(). 
+ * Returns a promise, which returns the desired information as an object.
+ */
+exports.getCountry = (country) => {
+	return this.getStats().then(stats => {
+		return stats.find(entry => entry.country == country.toUpperCase());
+	});
+}
