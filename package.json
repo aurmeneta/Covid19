@@ -1,21 +1,22 @@
 {
   "name": "covid19-stats",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Retrieve worldometers' live statistics of the Covid-19 pandemic. Scraper of worldometers.info",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/aurmeneta/covid19-stats.git"
   },
-  "keywords": [ "covid19" ],
+  "keywords": [
+    "covid19",
+    "worldometers"
+  ],
   "author": "Andrés Urmeneta B. <aurmenetab@gmail.com>",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/aurmeneta/covid19-stats/issues"
-  },
+  "bugs":"https://github.com/aurmeneta/covid19-stats/issues",
   "homepage": "https://github.com/aurmeneta/covid19-stats",
   "dependencies": {
     "axios": "^0.21.1",
-    "cheerio": "^1.0.0-rc.3"
+    "cheerio": "^1.0.0-rc.9"
   }
 }
