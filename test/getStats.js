@@ -17,6 +17,6 @@ exports.testGetStats =  async () => {
         })
     
         if (!everyCountry) {
-            throw "There are missing countries! Check log."
+            throw "getStats failed! \nThere are missing countries! Check log."
         }
 }
