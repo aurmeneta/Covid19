@@ -21,7 +21,7 @@ covid19Stats.getStats()
     }).catch(error => {
         console.log("getStats failed!")
         console.error(error)
-        throw error
+        process.exit(1)
     });
 
 // getCountry
