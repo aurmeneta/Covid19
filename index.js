@@ -46,13 +46,13 @@ exports.getStats = () => axios.get(siteUrl).then(response => {
 		const columns = $(row).find('td');
 
 		country = $(columns[1]).text().trim().toUpperCase();
-		totalCases = parseInt($(columns[2]).text().replace(charsToRemove,'')) || 0;
-		newCases = parseInt($(columns[3]).text().replace(charsToRemove,'')) || 0;
-		totalDeaths = parseInt($(columns[4]).text().replace(charsToRemove,'')) || 0;
-		newDeaths = parseInt($(columns[5]).text().replace(charsToRemove,'')) || 0;
+		totalCases = parseInt($(columns[2]).text().replace(charsToRemove, '')) || 0;
+		newCases = parseInt($(columns[3]).text().replace(charsToRemove, '')) || 0;
+		totalDeaths = parseInt($(columns[4]).text().replace(charsToRemove, '')) || 0;
+		newDeaths = parseInt($(columns[5]).text().replace(charsToRemove, '')) || 0;
 
 		// Add the data to the array.
-		data.push({country, totalCases, newCases, totalDeaths, newDeaths});
+		data.push({ country, totalCases, newCases, totalDeaths, newDeaths });
 	});
 
 	// Return the array.
